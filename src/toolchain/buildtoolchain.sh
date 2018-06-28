@@ -13,6 +13,7 @@ rm -rvf $TOOLS_LOCATION
 rm -rvf $SRC_LOCATION
 mkdir -pv $TOOLS_LOCATION
 mkdir -pv $SRC_LOCATION
+chmod -v a+wt $SRC_LOCATION
 
 #create user
 groupadd lfs
