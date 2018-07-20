@@ -10,18 +10,24 @@ getpkg() {
 	folder=$ports_desination$1
 	FileExist $folder
 	source $folder
-	msg_success "Пакет $name $version"
+	msg_success "Пакет $name-$version"
 	#загрузить исходник
 	downloadpkgsrc $source 'downloads/'
 	#распаковать исходник
-	unpack "downloads/$(basename $source)" "sources/"
+	basename="$(basename $source)"
+	unpack "downloads/$basename" "sources/" "$name-$version"
+	cd "sources/$name-$version"
+	msg "идёт сборка"
+	build
 }
 
 
 unpack() {
-	msg "идёт распаковка"
+	msg "идёт распаковка в $2$3"
+	rm -rf $2$3
 	tar xf $1 -C $2
 	msg_success "пакет распакован"
+	cd $2$3
 }
 
 downloadpkgsrc(){

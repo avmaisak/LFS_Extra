@@ -9,14 +9,16 @@ release=1
 source=(https://zlib.net/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
-
-	mkdir -p $PKG/lib
-	mv -v $PKG/usr/lib/libz.so.* $PKG/lib
-	ln -sfv ../../lib/$(readlink $PKG/usr/lib/libz.so) $PKG/usr/lib/libz.so
+../configure --prefix=/tools            \
+	--with-sysroot=$LFS        \
+	--with-lib-path=/tools/lib \
+	--target=$LFS_TGT          \
+	--disable-nls              \
+	--disable-werror
+make
+case $(uname -m) in
+  x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
+esac
+make install
 }
 md5sum=(85adef240c5f370b308da8c938951a68)
