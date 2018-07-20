@@ -1,0 +1,22 @@
+# description	: A linker, an assembler, and other tools for handling object files
+# homepage	: https://www.gnu.org/software/binutils/
+# maintainer	: emmett1, emmett1.2miligrams at gmail.com
+# depends	: glibc zlib
+
+name=binutils
+version=2.31.1
+release=1
+source=(https://ftp.gnu.org/gnu/binutils/$name-$version.tar.xz)
+md5sum=(5b7c9d4ce96f507d95c1b9a255e52418)
+
+build(){
+	cd $name-$version
+	mkdir -v build
+	cd       build
+	../configure --prefix=/tools            \
+             --with-sysroot=$LFS        \
+             --with-lib-path=/tools/lib \
+             --target=$LFS_TGT          \
+             --disable-nls              \
+             --disable-werror
+}
