@@ -1,0 +1,36 @@
+# description	: openssh
+# homepage		: http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.7p1.tar.gz
+
+name=openssh
+version=7.7p1
+release=1
+source=(http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz)
+
+
+build() {
+	install  -v -m700 -d /var/lib/sshd &&
+	chown    -v root:sys /var/lib/sshd &&
+
+	groupadd -g 50 sshd        &&
+	useradd  -c 'sshd PrivSep' \
+				-d /var/lib/sshd  \
+				-g sshd           \
+				-s /bin/false     \
+				-u 50 sshd
+
+	wget http://www.linuxfromscratch.org/patches/blfs/svn/openssh-7.7p1-openssl-1.1.0-1.patch
+	patch -Np1 -i openssh-7.7p1-openssl-1.1.0-1.patch
+	./configure --prefix=/usr                     \
+            --sysconfdir=/etc/ssh             \
+            --with-md5-passwords              \
+            --with-privsep-path=/var/lib/sshd
+	make
+	make install &&
+install -v -m755    contrib/ssh-copy-id /usr/bin
+
+install -v -m644    contrib/ssh-copy-id.1 \
+                    /usr/share/man/man1
+install -v -m755 -d /usr/share/doc/openssh
+install -v -m644    INSTALL LICENCE OVERVIEW README* \
+                    /usr/share/doc/openssh
+}
