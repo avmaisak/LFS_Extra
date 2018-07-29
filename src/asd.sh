@@ -48,7 +48,7 @@ case "$1" in
 			echo "downloading package from source [$source]"
 			echo "output [$PKG_SRC]"
 			# загрузка файла из источника
-			curl -L --url $source --output $PKG_SRC
+			curl --no-check-certificate -L --url $source --output $PKG_SRC
 			# распаковка
 			tar xvf $PKG_SRC
 			cd "$name-$version"
