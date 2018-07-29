@@ -1,0 +1,15 @@
+# description	:
+# homepage	: https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz
+
+name=wget
+version=1.19.5
+source=(https://ftp.gnu.org/gnu/wget/$name-$version.tar.gz)
+
+build() {
+./configure --prefix=/usr      \
+            --sysconfdir=/etc  \
+            --with-ssl=openssl
+	make
+	make check
+	make install
+}

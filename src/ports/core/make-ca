@@ -1,0 +1,13 @@
+# description	:
+# homepage	: https://github.com/djlucas/make-ca/
+
+name=make-ca
+version=0.8
+source=(https://github.com/djlucas/make-ca/archive/v$version/$name-$version.tar.gz)
+
+build() {
+	./configure --prefix=/usr
+	make
+	make check
+	make install
+}

@@ -16,6 +16,7 @@ case "$1" in
   "r")
     msg_success "repository type: [$repo]"
     msg_success "repository url:  [$repo_url]"
+    msg_success "temp folder:  [$dest_temp]"
     ;;
 
   "v")

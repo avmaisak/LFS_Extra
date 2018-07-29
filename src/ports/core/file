@@ -1,0 +1,13 @@
+# description	: Пакет содержит утилиты для определения типов файлов. Некоторым пакетам требуется, чтобы этот пакет был установлен.
+# homepage	: https://www.darwinsys.com/file/
+
+name=file
+version=5.34
+source=(ftp://ftp.astron.com/pub/file/$name-$version.tar.gz)
+
+build() {
+	./configure --prefix=/usr
+	make
+	make check
+	make install
+}
