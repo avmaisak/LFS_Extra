@@ -61,8 +61,8 @@ case "$1" in
 
 		declare -F execute && execute
 
-		#rm -rvf $PKG_META_TEMP_DEST
-		#rm -rvf $PKG_SRC
+		rm -rvf $PKG_META_TEMP_DEST
+		rm -rvf $PKG_SRC
 	;;
 
   *)
