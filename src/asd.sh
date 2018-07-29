@@ -40,12 +40,14 @@ case "$1" in
 
 		# указан source
 		if [ "$source" ]; then
+			echo "[ok] source > $source"
 			# имя файла
 			filename="${source##*/}"
 			# путь до загруженного архива
 			PKG_SRC="$dest_temp/$filename"
 			echo "package $PKG_SRC"
 			curl --url $URL -K $2 >> "$PKG_SRC" --silent
+			echo "tar xvf $PKG_SRC"
 			tar xvf $PKG_SRC
 			cd "$name-$version"
 		fi
