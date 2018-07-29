@@ -1,0 +1,19 @@
+# description	: Пакет содержит утилиты для определения типов файлов. Некоторым пакетам требуется, чтобы этот пакет был установлен.
+# homepage	: https://www.darwinsys.com/file/
+
+name=curl
+version=7.60.0
+source=(https://curl.haxx.se/download/$name-$version.tar.gz)
+
+build() {
+	./configure --prefix=/usr                           \
+            --disable-static                        \
+            --enable-threaded-resolver              \
+            --with-ca-path=/etc/ssl/certs
+	make
+	make install
+	rm -rf docs/examples/.deps
+	find docs \( -name Makefile\* -o -name \*.1 -o -name \*.3 \) -exec rm {} \;
+	install -v -d -m755 /usr/share/doc/curl-7.60.0
+	cp -v -R docs/*     /usr/share/doc/curl-7.60.0
+}
