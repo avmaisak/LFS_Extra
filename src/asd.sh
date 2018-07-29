@@ -34,25 +34,19 @@ case "$1" in
 
 		rm -rvf $PKG_META_TEMP_DEST
 
-		echo "installing package from url $URL to destination folder $PKG_META_TEMP_DEST"
-
 		curl --url $URL -K $2 >> $PKG_META_TEMP_DEST --silent
 		source "$PKG_META_TEMP_DEST"
 
 		# указан source
 		if [ "$source" ]; then
-			echo "[ok] source > $source"
 			# имя файла
 			filename="${source##*/}"
 			# путь до загруженного архива
 			PKG_SRC="$dest_temp/$filename"
-			echo "downloading package from source [$source]"
-			echo "output [$PKG_SRC]"
 			# загрузка файла из источника
 			curl --insecure -L --url $source --output $PKG_SRC --silent
-			# распаковка
 			PKG_SRC_UNPACK_DEST="$dest_temp/$name-$version"
-			echo "DEST UNPACK $PKG_SRC_UNPACK_DEST"
+			# распаковка
 			tar -xf $PKG_SRC -C $dest_temp
 			cd "$PKG_SRC_UNPACK_DEST"
 			# сборка
@@ -62,6 +56,7 @@ case "$1" in
 		declare -F execute && execute
 
 		rm -rvf $PKG_META_TEMP_DEST
+		rm -rvf $PKG_SRC_UNPACK_DEST
 		rm -rvf $PKG_SRC
 	;;
 
