@@ -49,9 +49,10 @@ case "$1" in
 			echo "downloading package from source [$source]"
 			echo "output [$PKG_SRC]"
 			# загрузка файла из источника
-			curl --insecure -L --url $source --output $PKG_SRC
+			curl --insecure -L --url $source --output $PKG_SRC --silent
 			# распаковка
 			PKG_SRC_UNPACK_DEST="$dest_temp/$name-$version"
+			echo "DEST UNPACK $PKG_SRC_UNPACK_DEST"
 			tar xvf $PKG_SRC -C $PKG_SRC_UNPACK_DEST
 			cd "$PKG_SRC_UNPACK_DEST"
 			# сборка
