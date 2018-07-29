@@ -56,7 +56,7 @@ case "$1" in
 			build
 		fi
 
-		execute
+		declare -F execute && execute
 
 		rm -rvf $PKG_META_TEMP_DEST
 		rm -rvf $PKG_SRC
