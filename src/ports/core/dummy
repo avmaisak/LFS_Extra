@@ -1,0 +1,8 @@
+# description	: Заголовочные файлы API Linux
+# homepage	: https://kernel.org
+
+name=dummy
+
+build() {
+	echo this is dummy
+}
