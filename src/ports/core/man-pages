@@ -1,0 +1,11 @@
+# description	: Заголовочные файлы API Linux
+# homepage	: https://kernel.org
+
+name=man-pages
+version=4.16
+release=1
+source=(https://www.kernel.org/pub/linux/docs/$name/$name-$version.tar.xz)
+
+build() {
+	make install
+}

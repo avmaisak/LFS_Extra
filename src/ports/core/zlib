@@ -1,0 +1,16 @@
+# description	: Пакет Zlib содержит библиотеку для сжатия и распаковки, которую используют некоторые программы.
+# homepage	: https://www.zlib.net/
+
+name=zlib
+version=1.2.11
+release=1
+source=(https://zlib.net/$name-$version.tar.xz)
+
+build() {
+	./configure --prefix=/usr
+	make
+	make check
+	make install
+	mv -v /usr/lib/libz.so.* /lib
+	ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+}
