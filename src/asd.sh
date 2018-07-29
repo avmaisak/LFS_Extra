@@ -51,8 +51,9 @@ case "$1" in
 			# загрузка файла из источника
 			curl --insecure -L --url $source --output $PKG_SRC
 			# распаковка
-			tar xvf $PKG_SRC
-			cd "$name-$version"
+			PKG_SRC_UNPACK_DEST="$dest_temp/$name-$version"
+			tar xvf $PKG_SRC -C $PKG_SRC_UNPACK_DEST
+			cd "$PKG_SRC_UNPACK_DEST"
 			# сборка
 			build
 		fi
