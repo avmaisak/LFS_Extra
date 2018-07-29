@@ -11,6 +11,10 @@ fi
 case "$1" in
  "help")
     source './help'
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d6ca8d5fe36896286afe812d34ecaded2bb2dc
     ;;
 
   "r")
