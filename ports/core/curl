@@ -11,6 +11,7 @@ build() {
             --enable-threaded-resolver              \
             --with-ca-path=/etc/ssl/certs
 	make
+	make test
 	make install
 	rm -rf docs/examples/.deps
 	find docs \( -name Makefile\* -o -name \*.1 -o -name \*.3 \) -exec rm {} \;
