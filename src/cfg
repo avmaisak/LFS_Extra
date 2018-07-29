@@ -4,3 +4,4 @@ repo_url="http://asd.maisak.ru"
 repo="core"
 #version
 version=0.0.1
+dest_temp="."
