@@ -5,7 +5,7 @@ name=fs
 version=2018.07.29
 release=1
 
-build() {
+execute() {
 	mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
 	mkdir -pv /{media/{floppy,cdrom},sbin,srv,var}
 	install -dv -m 0750 /root

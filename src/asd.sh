@@ -45,14 +45,21 @@ case "$1" in
 			filename="${source##*/}"
 			# путь до загруженного архива
 			PKG_SRC="$dest_temp/$filename"
-			echo "downloading package $PKG_SRC"
-			curl --url $URL -K --output "$PKG_SRC" --silent
-			echo "tar xvf $PKG_SRC"
+			echo "downloading package from source [$source]"
+			echo "output [$PKG_SRC]"
+			# загрузка файла из источника
+			curl -L --url $source --output $PKG_SRC
+			# распаковка
 			tar xvf $PKG_SRC
 			cd "$name-$version"
+			# сборка
+			build
 		fi
 
-		build
+		execute
+
+		rm -rvf $PKG_META_TEMP_DEST
+		rm -rvf $PKG_SRC
 	;;
 
   *)
