@@ -53,7 +53,7 @@ case "$1" in
 			# распаковка
 			PKG_SRC_UNPACK_DEST="$dest_temp/$name-$version"
 			echo "DEST UNPACK $PKG_SRC_UNPACK_DEST"
-			tar $PKG_SRC -C $PKG_SRC_UNPACK_DEST
+			tar xf $PKG_SRC -C $PKG_SRC_UNPACK_DEST
 			cd "$PKG_SRC_UNPACK_DEST"
 			# сборка
 			build
